@@ -17,6 +17,7 @@ def print_grid(grid):
     for line in grid:
         print(line)
 
+
 # add a new number in a random place
 
 
@@ -40,42 +41,50 @@ def add_num2(grid):
 
 
 def sum_right(grid):
+    can_move = False
     # Slide the nums to the right
     for y in range(len(grid)):
         for x in range(len(grid[y])-1, -1, -1):
-            if (x >= 0) and (x < len(grid[y])-1) and ((grid[y][x]) != 0):
+            if ((grid[y][x]) != 0):
                 for n in range(x, (len(grid[y]) - 1), 1):
                     if grid[y][n + 1] == 0:
+                        can_move = True
                         grid[y][n + 1] = grid[y][n]
                         grid[y][n] = 0
                         "print('=', grid[y], y)"
 
                     if grid[y][n] == grid[y][n+1]:
+                        can_move = True
                         "#print('+', grid[y], y)"
                         grid[y][n+1] *= 2
                         grid[y][n] = 0
                         "#print('-', grid[y], y)"
-
+    return (can_move)
 
 def sum_left(grid):
+    can_move = False
     # Slide the nums to the left
     for y in range(len(grid)):
         for x in range(0, len(grid[y]), 1):
-            if (x >= 0) and (x < len(grid[y])) and ((grid[y][x]) != 0):
+            if ((grid[y][x]) != 0):
                 for n in range(x, 0, -1):
-                    if grid[y][n - 1] == 0:
-                        grid[y][n - 1] = grid[y][n]
-                        grid[y][n] = 0
-                        "print('=', grid[y], y)"
+                        if grid[y][n - 1] == 0:
+                            can_move = True
+                            grid[y][n - 1] = grid[y][n]
+                            grid[y][n] = 0
+                            "print('=', grid[y], y)"
 
-                    if grid[y][n] == grid[y][n - 1]:
-                        "print('+', grid[y], y)"
-                        grid[y][n - 1] *= 2
-                        grid[y][n] = 0
-                        "print('-', grid[y], y)"
+                        if grid[y][n] == grid[y][n - 1]:
+                            can_move = True
+                            "print('+', grid[y], y)"
+                            grid[y][n - 1] *= 2
+                            grid[y][n] = 0
+                            "print('-', grid[y], y)"
+    return (can_move)
 
 
 def sum_up(grid):
+    can_move = False
     # Slide the nums to the up
     for x in range(0, len(grid[1]), 1):
         for y in range(0, len(grid), 1):
@@ -88,23 +97,31 @@ def sum_up(grid):
                     print('==')
                     """
                     if grid[n - 1][x] == 0:
+                        can_move = True
                         grid[n - 1][x] = grid[n][x]
                         grid[n][x] = 0
                     if grid[n][x] == grid[n - 1][x]:
+                        can_move = True
                         grid[n - 1][x] *= 2
                         grid[n][x] = 0
+    return(True)
 
 
 def sum_down(grid):
+    can_move = False
     # Slide the nums to the down
     for x in range(0, len(grid[1]), 1):
         for y in range(((len(grid)) - 1), -1, -1):
-            if (y > -1) and (y < (len(grid))-1) and ((grid[y][x]) != 0):
+            # (y < (len(grid))-1) preventes that code run in the last line
+            if ((grid[y][x]) != 0):
                 for n in range(y, len(grid)-1, 1):
+                    can_move = True
                     if grid[n + 1][x] == 0:
                         grid[n + 1][x] = grid[n][x]
                         grid[n][x] = 0
 
                     if grid[n][x] == grid[n + 1][x]:
+                        can_move = True
                         grid[n + 1][x] *= 2
                         grid[n][x] = 0
+    return (can_move)
