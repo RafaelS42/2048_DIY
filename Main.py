@@ -1,18 +1,20 @@
 import fun
 
-#grid = []
+grid = []
+"""
 grid = [
 [64, 32, 16, 2],
 [16, 8, 4, 0],
 [8, 4, 0, 0],
 [4, 0, 0, 0]]
+"""
 y = 4
 x = 4
 
-#fun.create_grid(grid, y, x)
+fun.create_grid(grid, y, x)
 
 can_move = False
-#fun.add_num2(grid)
+fun.add_num2(grid)
 
 while True:
 
